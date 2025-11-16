@@ -5,7 +5,11 @@
 	const { worldName, metalName, items } = data;
 
 	const hideArray: boolean[] = $state(new Array(items.length).fill(false));
+
+	let filter = $state('');
 </script>
+
+<svelte:window onkeydown={(e) => console.log(e)} />
 
 <main class="min-h-screen min-w-screen bg-black/80">
 	<h1 class="py-2 text-center text-6xl font-black text-white">{worldName}</h1>

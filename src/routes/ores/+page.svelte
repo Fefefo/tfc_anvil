@@ -21,10 +21,22 @@
 			oreMLAmount.normal * oreAmount.normal +
 			oreMLAmount.rich * oreAmount.rich
 	);
+
+	function resetAll() {
+		oreAmount = {
+			small: 0,
+			poor: 0,
+			normal: 0,
+			rich: 0
+		};
+	}
 </script>
 
 <main class="flex min-h-screen w-screen flex-col items-center justify-center gap-6 bg-black/80">
-	<div class="flex justify-between rounded-2xl bg-white p-8 text-lg">
+	<div class="relative flex justify-between rounded-2xl bg-white p-8 text-lg">
+		<div class="absolute top-2 right-2">
+			<button class="cursor-pointer" onclick={resetAll}>🧹</button>
+		</div>
 		<div>
 			<p class="font-bold">OreToML:</p>
 			<div class="flex flex-col justify-between capitalize">

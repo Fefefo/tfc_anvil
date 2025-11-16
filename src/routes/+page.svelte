@@ -6,11 +6,6 @@
 	const metalQuery = getMetals();
 
 	let queue: number[] = $state([]);
-	let current = $derived.by(() => {
-		let value = 0;
-		queue.map((v) => (value += v));
-		return value;
-	});
 	type PossibileHits = -1 | -15 | 2 | 7 | 13 | 16 | 0;
 	let finishHits: {
 		last: PossibileHits;
@@ -46,6 +41,7 @@
 
 		return starting;
 	});
+
 	let queueDisplay = $derived.by(() => {
 		let temp = [...queue];
 		let index = 0;
@@ -69,6 +65,12 @@
 			}
 		}
 		return temp;
+	});
+
+	let current = $derived.by(() => {
+		let value = 0;
+		queue.map((v) => (value += v));
+		return value;
 	});
 
 	function handleButtons(value: number) {
@@ -262,7 +264,13 @@
 		<div class="flex justify-between">
 			<label class="flex items-center justify-between gap-2">
 				End point
-				<input type="number" min="0" max="150" bind:value={endPoint} />
+				<input
+					class="cursor-pointer rounded px-2 py-1 text-center font-semibold"
+					type="number"
+					min="0"
+					max="160"
+					bind:value={endPoint}
+				/>
 			</label>
 			<div>
 				<p>To reach</p>
@@ -280,7 +288,7 @@
 			<label>
 				last
 				<section>
-					<select bind:value={finishHits.last}>
+					<select class="cursor-pointer rounded" bind:value={finishHits.last}>
 						{#each [0, -1, -15, 2, 7, 13, 16] as hit}
 							<option value={hit}>{!hit ? 'none' : hit}</option>
 						{/each}
@@ -290,7 +298,7 @@
 			<label>
 				second last
 				<section>
-					<select bind:value={finishHits.secondLast}>
+					<select class="cursor-pointer rounded" bind:value={finishHits.secondLast}>
 						{#each [0, -1, -15, 2, 7, 13, 16] as hit}
 							<option value={hit}>{!hit ? 'none' : hit}</option>
 						{/each}
@@ -300,7 +308,7 @@
 			<label>
 				third last
 				<section>
-					<select bind:value={finishHits.thirdLast}>
+					<select class="cursor-pointer rounded" bind:value={finishHits.thirdLast}>
 						{#each [0, -1, -15, 2, 7, 13, 16] as hit}
 							<option value={hit}>{!hit ? 'none' : hit}</option>
 						{/each}
