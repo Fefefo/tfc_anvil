@@ -27,9 +27,47 @@
 			editing.editing = false;
 		}
 	);
+
+	let sorted = $derived.by(() => {
+		if (filter === '') return items;
+		const arr = [...items];
+
+		let a = arr.filter((item) => {
+			if (item.name.toLowerCase().startsWith(filter.toLowerCase())) {
+				return item;
+			}
+		});
+		return a;
+	});
+
+	function onkeydown(
+		event: KeyboardEvent & {
+			currentTarget: EventTarget & Window;
+		}
+	) {
+		const { key } = event;
+		const uglyKeys = ['Control', 'Shift'];
+
+		for (const keys of uglyKeys) {
+			if (key === keys) return;
+		}
+
+		if (key === 'Escape') {
+			filter = '';
+			return;
+		}
+
+		if (key.toLowerCase() === 'backspace') {
+			let temp = filter.split('');
+			temp.splice(temp.length - 1, 1);
+			filter = temp.join('');
+			return;
+		}
+		filter += key;
+	}
 </script>
 
-<svelte:window onkeydown={(e) => console.log(e)} />
+<svelte:window {onkeydown} />
 
 {#if editing.editing}
 	{@const item = editing.item}
@@ -55,7 +93,7 @@
 >
 	<h1 class="py-2 text-center text-6xl font-black text-white">{worldName}</h1>
 	<div class="mx-4 mt-4 grid grid-cols-3 gap-8 pb-8">
-		{#each items as { metal_id, world_id, name, path, startingMaterial, id: itemID }, index}
+		{#each sorted as { metal_id, world_id, name, path, inputItemName, id: itemID }, index}
 			{#if !hideArray[index]}
 				<div class="relative flex rounded-2xl bg-white p-6">
 					<p class="font-bold capitalize">{name} {metalName}</p>
@@ -78,7 +116,7 @@
 												id: itemID,
 												name,
 												path,
-												startingMaterial,
+												inputItemName,
 												world_id,
 												metal_id
 											},
