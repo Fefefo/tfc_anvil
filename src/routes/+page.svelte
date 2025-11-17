@@ -37,7 +37,7 @@
 	let worldValue = $state(params.world);
 	let metalValue = $state(params.metal);
 	let itemName = $state('');
-	let material = $state('e2101ff5-7557-4ffd-9643-83b88cada258');
+	let inputItem = $state('ingot');
 	let endPoint = $state(0);
 	let inputName: HTMLInputElement;
 
@@ -105,7 +105,7 @@
 			name: itemName,
 			metalID: metalValue,
 			worldID: worldValue,
-			materialID: material,
+			itemInput: inputItem,
 			path: queueDisplay
 		});
 		itemName = '';
@@ -284,7 +284,7 @@
 			{:else if inputItems.current}
 				<label class="col-span-2 flex flex-col">
 					Material:
-					<select bind:value={material} class="cursor-pointer rounded">
+					<select bind:value={inputItem} class="cursor-pointer rounded">
 						{#each inputItems.current as materials}
 							<option value={materials.name}>
 								{materials.name}
@@ -307,16 +307,16 @@
 					min="0"
 					max="160"
 					bind:value={
-						() => current,
+						() => endPoint,
 						(value) => {
 							if (value > 160) {
-								current = 160;
+								endPoint = 160;
 								return;
 							} else if (value < 0) {
-								current = 0;
+								endPoint = 0;
 								return;
 							}
-							current = value;
+							endPoint = value;
 						}
 					}
 				/>
