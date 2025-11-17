@@ -44,3 +44,15 @@ export const getInputItems = query(async () => {
   const inputItems = await db.select().from(inputItemDB);
   return inputItems;
 })
+
+
+export const updateItem = command((z.object({ id: z.string(), name: z.string(), path: z.array(z.number()), inputItem: z.string() })),
+  async ({ id, name, path, inputItem }) => {
+    await db.update(itemDB).set({
+      name: name,
+      path: path,
+      inputItemName: inputItem
+    }).where(eq(itemDB.id, id));
+  });
+
+

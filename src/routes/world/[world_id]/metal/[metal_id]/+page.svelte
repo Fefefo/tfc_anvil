@@ -1,7 +1,7 @@
 <script lang="ts">
-	import type { itemDB, ItemDBSelect } from '$lib/server/db/schema.js';
+	import type { ItemDBSelect } from '$lib/server/db/schema.js';
 	import { onClickOutside } from 'runed';
-	import { removeItem } from '../../../../data.remote';
+	import { removeItem, updateItem } from '../../../../data.remote';
 
 	const { data } = $props();
 	const {
@@ -16,8 +16,10 @@
 	let editing: {
 		item?: ItemDBSelect;
 		editing: boolean;
+		path: number[];
 	} = $state({
-		editing: false
+		editing: false,
+		path: []
 	});
 
 	let filter = $state('');
@@ -42,7 +44,7 @@
 			});
 		}
 
-		if (filter === '') return arr;
+		if (filter === '') return items;
 
 		let a = arr.filter((item) => {
 			if (item.name.toLowerCase().startsWith(filter.toLowerCase())) {
@@ -84,17 +86,52 @@
 {#if editing.editing}
 	{@const item = editing.item}
 	{#if item}
+		{(editing.path = item.path)}
 		<div
 			class="absolute top-0 left-0 z-40 flex h-screen w-screen items-center justify-center bg-gray-950/80 text-black"
 		>
-			<div bind:this={modal} class="rounded-2xl bg-white">
-				<pre class=""><code>if{JSON.stringify(item, null, 2)}</code></pre>
+			<div bind:this={modal} class="flex min-w-1/3 flex-col gap-4 rounded-2xl bg-white p-8">
+				<h1>Editing <span class="font-black">{item.name}</span></h1>
+				<input type="text" bind:value={item.name} class="rounded" />
+				<select bind:value={item.inputItemName} class="rounded">
+					{#each inputItems as value}
+						<option>{value.name}</option>
+					{/each}
+				</select>
+				<div class="grid grid-cols-8 gap-4">
+					{#each editing.path as value, index}
+						<input
+							type="number"
+							bind:value={
+								() => value,
+								(newValue) => {
+									editing.path[index] = newValue;
+								}
+							}
+							class="w-12 rounded"
+						/>
+					{/each}
+					<button
+						class="cursor-pointer rounded border p-2 font-black"
+						onclick={() => editing.path.push(0)}>+</button
+					>
+				</div>
+				<button
+					onclick={() => {
+						updateItem({
+							name: item.name,
+							inputItem: item.inputItemName,
+							path: editing.path,
+							id: item.id
+						});
+						editing.editing = false;
+					}}
+					class="cursor-pointer rounded bg-green-600 py-2 font-black text-white uppercase"
+				>
+					Update
+				</button>
 			</div>
 		</div>
-	{:else}
-		<pre class="absolute top-0 left-0 rounded-2xl bg-white"><code
-				>else{JSON.stringify(item, null, 2)}</code
-			></pre>
 	{/if}
 {/if}
 
@@ -133,6 +170,7 @@
 									❌
 								</button>
 								<button
+									class="cursor-pointer"
 									onclick={() =>
 										(editing = {
 											item: {
@@ -143,7 +181,8 @@
 												world_id,
 												metal_id
 											},
-											editing: true
+											editing: true,
+											path: path
 										})}>✏️</button
 								>
 							</div>
@@ -175,3 +214,15 @@
 		</a>
 	</div>
 </main>
+
+<style>
+	input[type='number']::-webkit-outer-spin-button,
+	input[type='number']::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+	}
+
+	input[type='number'] {
+		-moz-appearance: textfield;
+	}
+</style>
