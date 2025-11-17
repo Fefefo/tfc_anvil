@@ -1,6 +1,6 @@
 import { command, form, query } from "$app/server";
 import { db } from "$lib/server/db";
-import { itemDB, metalGroupsDB, startingMatirial, worldDB } from "$lib/server/db/schema";
+import { inputItemDB, itemDB, metalGroupsDB, worldDB } from "$lib/server/db/schema";
 import { eq } from "drizzle-orm";
 import z from "zod";
 
@@ -31,16 +31,16 @@ export const createMetal = form((z.object({ name: z.string().min(1) })),
     getMetals().refresh();
   });
 
-export const createItem = command((z.object({ name: z.string().min(1), metalID: z.string(), worldID: z.string(), materialID: z.string(), path: z.array(z.number()) })),
-  async ({ name, worldID, metalID, materialID, path }) => {
-    await db.insert(itemDB).values({ name: name, world_id: worldID, metal_id: metalID, startingMaterial: materialID, path: path });
+export const createItem = command((z.object({ name: z.string().min(1), metalID: z.string(), worldID: z.string(), itemInput: z.string(), path: z.array(z.number()) })),
+  async ({ name, worldID, metalID, itemInput, path }) => {
+    await db.insert(itemDB).values({ name: name, world_id: worldID, metal_id: metalID, inputItemName: itemInput, path: path });
   });
 
 export const removeItem = command((z.string()), async (itemID) => {
   await db.delete(itemDB).where(eq(itemDB.id, itemID))
 });
 
-export const getMaterials = query(async () => {
-  const materials = await db.select().from(startingMatirial);
-  return materials;
+export const getInputItems = query(async () => {
+  const inputItems = await db.select().from(inputItemDB);
+  return inputItems;
 })

@@ -6,7 +6,7 @@
 		getMetals,
 		createMetal,
 		createItem,
-		getMaterials
+		getInputItems
 	} from './data.remote';
 	import { useSearchParams } from 'runed/kit';
 	import z from 'zod';
@@ -21,7 +21,7 @@
 	const possibility = [-3, -6, -9, -15, 2, 7, 13, 16] as const;
 	const worldQuery = getWorlds();
 	const metalQuery = getMetals();
-	const startingMaterials = getMaterials();
+	const inputItems = getInputItems();
 
 	let queue: number[] = $state([]);
 	type PossibileHits = -1 | -15 | 2 | 7 | 13 | 16 | 0;
@@ -277,16 +277,16 @@
 				<p>New one</p>
 			{/if}
 
-			{#if startingMaterials.loading}
+			{#if inputItems.loading}
 				<p>Loading...</p>
-			{:else if startingMaterials.error}
+			{:else if inputItems.error}
 				<p>Something wrong....</p>
-			{:else if startingMaterials.current}
+			{:else if inputItems.current}
 				<label class="col-span-2 flex flex-col">
 					Material:
 					<select bind:value={material} class="cursor-pointer rounded">
-						{#each startingMaterials.current as materials}
-							<option value={materials.id}>
+						{#each inputItems.current as materials}
+							<option value={materials.name}>
 								{materials.name}
 							</option>
 						{/each}

@@ -1,5 +1,6 @@
 import { sql } from 'drizzle-orm';
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core';
+import { db } from '.';
 
 export const worldDB = sqliteTable('world', {
   id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
@@ -17,12 +18,11 @@ export const itemDB = sqliteTable('item', {
   metal_id: text('metal_id').references(() => metalGroupsDB.id),
   world_id: text('world_id').references(() => worldDB.id),
   path: text('path', { mode: "json" }).notNull().$type<number[]>().default(sql`(json_array())`),
-  startingMaterial: text('starting_material_id').references(() => startingMatirial.id).default("e2101ff5-7557-4ffd-9643-83b88cada258")
+  inputItemName: text('inputItemName').references(() => inputItemDB.name).default("ingot")
 });
 
-export const startingMatirial = sqliteTable("startingMaterial", {
-  id: text('id').primaryKey().$defaultFn(() => crypto.randomUUID()),
-  name: text('name'),
+export const inputItemDB = sqliteTable("inputItem", {
+  name: text('name').primaryKey(),
   inIngots: integer('inIngots'),
   inMillibuckets: integer('inMillibuckets')
 });
