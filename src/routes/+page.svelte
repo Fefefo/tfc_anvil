@@ -124,6 +124,47 @@
 		queue = [];
 	}
 
+	function autohammerize() {
+		let bestPath: number[] | null;
+		if (toReach[0] != toReach[1]) {
+			const paths = [{name: "bp0", value: bfs(toReach[0])}, {name: "bp1", value: bfs(toReach[1])}, {name: "bp2", value: bfs(toReach[2])}]
+			bestPath = paths.filter(e => Array.isArray(e.value)).sort((a,b) => a.value!.length - b.value!.length)[0].value ?? null;
+		} else bestPath = bfs(toReach[0])
+		if (bestPath != null) queue = bestPath
+		else clearQueue()
+	}
+
+	function bfs(target: number): number[] | null {
+		const moves = [-3, -6, -9, -15, +2, +7, +13, +16];
+
+		const MIN = 0; // prevents moves that break the item
+		const MAX = target + 16; // let the bfs go a bit over
+
+		const queue: Array<{ value: number; path: number[] }> = [];
+		const visited = new Set<number>();
+
+		queue.push({ value: 0, path: [] });
+		visited.add(0);
+
+		while (queue.length > 0) {
+			const { value, path } = queue.shift()!;
+
+			if (value === target) return path;
+
+			for (const move of moves) {
+				const next = value + move;
+
+				if (next < MIN || next > MAX) continue;
+				if (visited.has(next)) continue;
+
+				visited.add(next);
+				queue.push({ value: next, path: [...path, move] });
+			}
+		}
+
+		return null;
+	}
+
 	onMount(() => {
 		inputName.focus();
 	});
@@ -387,6 +428,15 @@
 					>
 				{/each}
 			</div>
+		</div>
+
+		<div class="flex justify-center pt-4">
+			<button
+				class="border-2 border-gray-900 bg-gray-300 px-8 py-2 font-bold"
+				onclick={autohammerize}
+			>
+				AUTOHAMMER
+			</button>
 		</div>
 	</section>
 	<div class="w-1/4">
