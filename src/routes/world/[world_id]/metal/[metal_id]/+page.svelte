@@ -7,7 +7,8 @@
 	const {
 		world: { name: worldName, world_id },
 		metal: { name: metalName, metal_id },
-		items
+		items,
+		inputItems
 	} = data;
 	const hideArray: boolean[] = $state(new Array(items.length).fill(false));
 	let modal = $state<HTMLElement>()!;
@@ -20,6 +21,7 @@
 	});
 
 	let filter = $state('');
+	let sortInput = $state('');
 
 	onClickOutside(
 		() => modal,
@@ -29,8 +31,18 @@
 	);
 
 	let sorted = $derived.by(() => {
-		if (filter === '') return items;
-		const arr = [...items];
+		let arr = items;
+		if (sortInput === '') {
+			arr = [...items];
+		} else {
+			arr = [...items].filter((v) => {
+				if (v.inputItemName === sortInput) {
+					return v;
+				}
+			});
+		}
+
+		if (filter === '') return arr;
 
 		let a = arr.filter((item) => {
 			if (item.name.toLowerCase().startsWith(filter.toLowerCase())) {
@@ -92,6 +104,17 @@
 		: ''}"
 >
 	<h1 class="py-2 text-center text-6xl font-black text-white">{worldName}</h1>
+	<div class="m-4 rounded bg-white px-4 py-2">
+		<select bind:value={sortInput} class="cursor-pointer rounded font-semibold capitalize">
+			<option value=""> none</option>
+			{#each inputItems as item}
+				<option value={item.name}>
+					{item.name}
+				</option>
+			{/each}
+		</select>
+	</div>
+
 	<div class="mx-4 mt-4 grid grid-cols-3 gap-8 pb-8">
 		{#each sorted as { metal_id, world_id, name, path, inputItemName, id: itemID }, index}
 			{#if !hideArray[index]}
@@ -127,7 +150,7 @@
 							<p class="text-lg">{value}</p>
 						{/each}
 						<p>({path.reduce((accumulator, currentValue) => accumulator + currentValue, 0)})</p>
-						<p class="absolute -bottom-1 left-4 text-2xl font-black">
+						<p class="absolute bottom-0 left-4 text-2xl font-black">
 							{[...path]
 								.slice(
 									0,
@@ -136,6 +159,9 @@
 									})
 								)
 								.reduce((acc, cur) => acc + cur, 0)}
+						</p>
+						<p class="absolute right-4 bottom-0 text-2xl font-black">
+							{inputItemName}
 						</p>
 					</div>
 				</div>
