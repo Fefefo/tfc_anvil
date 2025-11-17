@@ -300,7 +300,7 @@
 	<section class="rounded-2xl bg-white p-8">
 		<div class="flex justify-between">
 			<label class="flex items-center justify-between gap-2">
-				End point
+				End point:
 				<input
 					class="text cursor-pointer rounded px-2 py-1 text-center font-semibold"
 					type="number"
@@ -321,11 +321,11 @@
 					}
 				/>
 			</label>
-			<div>
-				<p>To reach</p>
+			<div class="flex items-center gap-1">
+				<p>To reach:</p>
 				<div class="flex gap-1">
 					{#each toReach as end}
-						<p>
+						<p class="rounded border px-3 py-1 text-lg font-semibold">
 							{end}
 						</p>
 					{/each}
