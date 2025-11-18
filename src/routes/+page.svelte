@@ -438,7 +438,7 @@
 		</div>
 
 		<div class="absolute right-3 bottom-2 cursor-pointer rounded border p-0 text-xs">
-			<button class="text-xs" onclick={autohammerize}> 🔨 </button>
+			<button class="text-xs" onclick={autohammerize}>🖥️</button>
 		</div>
 	</section>
 	<div class="w-1/4">

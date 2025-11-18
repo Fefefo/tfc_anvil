@@ -13,8 +13,8 @@
 		<div class="grid grid-cols-{worlds.current.length > 3 ? 3 : worlds.current.length}">
 			{#each worlds.current as { name, id } (id)}
 				<a href={`/world/${id}`}>
-					<div class="rounded-2xl bg-white p-6">
-						<p class="h-full w-full text-center align-bottom text-2xl">{name}</p>
+					<div class="grid place-items-center rounded-2xl bg-white px-12 py-32">
+						<p class="text-4xl font-black">{name}</p>
 					</div>
 				</a>
 			{/each}

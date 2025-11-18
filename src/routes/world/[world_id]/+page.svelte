@@ -16,9 +16,9 @@
 			{#each metals.current as metal}
 				<a href={`/world/${worldID}/metal/${metal.id}`}>
 					<div
-						class="h-24 w-24 place-content-center rounded-2xl bg-white text-center text-sm font-bold"
+						class="h-48 w-48 place-content-center rounded-2xl bg-white text-center text-sm font-bold"
 					>
-						<p class="text-lg">{metal.name}</p>
+						<p class="text-2xl">{metal.name}</p>
 					</div>
 				</a>
 			{/each}

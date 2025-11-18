@@ -13,7 +13,7 @@
 		<a href="/">home</a>
 		<a href="/world">world</a>
 		<a href="/ores">ore</a>
-		<a href="/alloys">ore</a>
+		<a href="/alloys">alloys</a>
 	</div>
 	{@render children()}
 </div>
