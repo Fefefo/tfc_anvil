@@ -1,0 +1,280 @@
+{
+  "crops": [
+    {
+      "name": "Barley",
+      "temperature": {
+        "min": -8,
+        "max": 26
+      },
+      "hydration": {
+        "min": 18,
+        "max": 75
+      },
+      "nutrient": "Nitrogen"
+    },
+    {
+      "name": "Oat",
+      "temperature": {
+        "min": 3,
+        "max": 40
+      },
+      "hydration": {
+        "min": 35,
+        "max": 100
+      },
+      "nutrient": "Phosphorus"
+    },
+    {
+      "name": "Rye",
+      "temperature": {
+        "min": -11,
+        "max": 30
+      },
+      "hydration": {
+        "min": 25,
+        "max": 85
+      },
+      "nutrient": "Phosphorus"
+    },
+    {
+      "name": "Maize",
+      "temperature": {
+        "min": 13,
+        "max": 40
+      },
+      "hydration": {
+        "min": 75,
+        "max": 100
+      },
+      "nutrient": "Phosphorus"
+    },
+    {
+      "name": "Wheat",
+      "temperature": {
+        "min": -4,
+        "max": 35
+      },
+      "hydration": {
+        "min": 25,
+        "max": 100
+      },
+      "nutrient": "Potassium"
+    },
+    {
+      "name": "Rice",
+      "temperature": {
+        "min": 15,
+        "max": 30
+      },
+      "hydration": {
+        "min": 25,
+        "max": 100
+      },
+      "nutrient": "Phosphorus"
+    },
+    {
+      "name": "Beet",
+      "temperature": {
+        "min": -5,
+        "max": 20
+      },
+      "hydration": {
+        "min": 18,
+        "max": 85
+      },
+      "nutrient": "Potassium"
+    },
+    {
+      "name": "Cabbage",
+      "temperature": {
+        "min": -10,
+        "max": 27
+      },
+      "hydration": {
+        "min": 15,
+        "max": 65
+      },
+      "nutrient": "Nitrogen"
+    },
+    {
+      "name": "Carrot",
+      "temperature": {
+        "min": 3,
+        "max": 30
+      },
+      "hydration": {
+        "min": 25,
+        "max": 100
+      },
+      "nutrient": "Potassium"
+    },
+    {
+      "name": "Garlic",
+      "temperature": {
+        "min": -20,
+        "max": 18
+      },
+      "hydration": {
+        "min": 15,
+        "max": 75
+      },
+      "nutrient": "Nitrogen"
+    },
+    {
+      "name": "Green Beens",
+      "temperature": {
+        "min": 2,
+        "max": 35
+      },
+      "hydration": {
+        "min": 38,
+        "max": 100
+      },
+      "nutrient": "Nitrogen"
+    },
+    {
+      "name": "Potato",
+      "temperature": {
+        "min": -1,
+        "max": 37
+      },
+      "hydration": {
+        "min": 50,
+        "max": 100
+      },
+      "nutrient": "Potassium"
+    },
+    {
+      "name": "Pumpkins",
+      "temperature": {
+        "min": 0,
+        "max": 30
+      },
+      "hydration": {
+        "min": 30,
+        "max": 80
+      },
+      "nutrient": "Phosphorus"
+    },
+    {
+      "name": "Melons",
+      "temperature": {
+        "min": 5,
+        "max": 37
+      },
+      "hydration": {
+        "min": 75,
+        "max": 100
+      },
+      "nutrient": "Phosphorus"
+    },
+    {
+      "name": "Red Bells Peppers",
+      "temperature": {
+        "min": 16,
+        "max": 30
+      },
+      "hydration": {
+        "min": 25,
+        "max": 60
+      },
+      "nutrient": "Potassium"
+    },
+    {
+      "name": "Yellow Bells Peppers",
+      "temperature": {
+        "min": 16,
+        "max": 30
+      },
+      "hydration": {
+        "min": 25,
+        "max": 60
+      },
+      "nutrient": "Potassium"
+    },
+    {
+      "name": "Onions",
+      "temperature": {
+        "min": 0,
+        "max": 30
+      },
+      "hydration": {
+        "min": 25,
+        "max": 90
+      },
+      "nutrient": "Nitrogen"
+    },
+    {
+      "name": "Soybeams",
+      "temperature": {
+        "min": 8,
+        "max": 30
+      },
+      "hydration": {
+        "min": 40,
+        "max": 100
+      },
+      "nutrient": "Nitrogen"
+    },
+    {
+      "name": "Squash",
+      "temperature": {
+        "min": 5,
+        "max": 33
+      },
+      "hydration": {
+        "min": 23,
+        "max": 95
+      },
+      "nutrient": "Potassium"
+    },
+    {
+      "name": "Sugarcane",
+      "temperature": {
+        "min": 12,
+        "max": 38
+      },
+      "hydration": {
+        "min": 40,
+        "max": 100
+      },
+      "nutrient": "Potassium"
+    },
+    {
+      "name": "Tomatoes",
+      "temperature": {
+        "min": 0,
+        "max": 36
+      },
+      "hydration": {
+        "min": 30,
+        "max": 95
+      },
+      "nutrient": "Potassium"
+    },
+    {
+      "name": "Jute",
+      "temperature": {
+        "min": 5,
+        "max": 37
+      },
+      "hydration": {
+        "min": 25,
+        "max": 100
+      },
+      "nutrient": "Potassium"
+    },
+    {
+      "name": "Papyrus",
+      "temperature": {
+        "min": 19,
+        "max": 37
+      },
+      "hydration": {
+        "min": 100,
+        "max": 85
+      },
+      "nutrient": "Potassium"
+    }
+  ]
+}
